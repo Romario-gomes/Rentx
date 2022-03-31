@@ -4,6 +4,7 @@ import { IUsersRespository } from "../../repositories/IUsersRepository";
 import { sign } from "jsonwebtoken";
 
 import { compare } from "bcryptjs";
+import { AppError } from "../../../../errors/AppError";
 
 interface IRequest {
     email: string;
@@ -29,14 +30,14 @@ class AuthenticateUserUseCase {
 
         // Usuario Existe
         if (!user) {
-            throw new Error("Email or password incorrect!");
+            throw new AppError("Email or password incorrect!");
         }
         
         const passwordMatch = await compare(password, user.password);
 
         // Senha está Correta
         if(!passwordMatch){
-            throw new Error("Email or password incorrect!");
+            throw new AppError("Email or password incorrect!");
 
         }
 
