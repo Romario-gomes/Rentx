@@ -10,4 +10,4 @@ Testes de integração: Tester a aplicação inteira
 
 TDD ( Test Driven Development )
 
-Desenvolvimento dirigido a testes
+Desenvolvimento dirigido a teste
