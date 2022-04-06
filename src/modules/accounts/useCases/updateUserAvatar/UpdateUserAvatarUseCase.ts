@@ -17,6 +17,7 @@ class UpdateUserAvatarUseCase{
         const user = await this.usersRepository.findById(user_id);
     
         if(user.avatar){
+            console.log("user avatar: ", user.avatar);
             await deleteFile(`./tmp/avatar/${user.avatar}`);
         }
 
