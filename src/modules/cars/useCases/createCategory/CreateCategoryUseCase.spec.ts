@@ -11,9 +11,20 @@ describe("create Category", () => {
 
     });
 
-    it("Should be able create a new category", () => {
-        const soma = 2 + 2;
+    it("Should be able create a new category", async () => {
+        const category = {
+            name: "Category test",
+            description: "Category description Test",
+        }
 
-        expect(soma).toBe(4);
+
+        await createCategoryUseCase.execute({
+            name: category.name,
+            description: category.description,
+        });
+
+        const categoryCreated = await categoriesRepositoryInMemory.findByName(category.name);
+
+        expect(categoryCreated).toHaveProperty("id");
     })
 })
