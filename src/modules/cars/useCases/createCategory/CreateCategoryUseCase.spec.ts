@@ -14,7 +14,7 @@ describe("create Category", () => {
     it("Should be able create a new category", async () => {
         const category = {
             name: "Category test",
-            description: "Category description Test a",
+            description: "Category description Test",
         }
 
 
