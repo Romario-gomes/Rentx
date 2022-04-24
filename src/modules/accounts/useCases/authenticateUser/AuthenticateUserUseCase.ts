@@ -4,7 +4,8 @@ import { IUsersRespository } from "@modules/accounts/repositories/IUsersReposito
 import { sign } from "jsonwebtoken";
 
 import { compare } from "bcryptjs";
-import { AppError } from "@errors/AppError";
+import { AppError } from "../../../../errors/AppError";
+
 
 interface IRequest {
     email: string;
