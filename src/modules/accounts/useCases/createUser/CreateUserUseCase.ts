@@ -3,8 +3,8 @@ import { inject, injectable } from "tsyringe";
 import { hash } from "bcryptjs";
  
 import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
+import { AppError } from "../../../../shared/errors/AppError";
 import { IUsersRespository } from "@modules/accounts/repositories/IUsersRepository";
-import { AppError } from "../../../../errors/AppError";
 
 
 
