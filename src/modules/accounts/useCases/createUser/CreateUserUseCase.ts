@@ -4,7 +4,7 @@ import { hash } from "bcryptjs";
  
 import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
 import { AppError } from "../../../../shared/errors/AppError";
-import { IUsersRespository } from "@modules/accounts/repositories/IUsersRepository";
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 
 
 
@@ -12,7 +12,7 @@ import { IUsersRespository } from "@modules/accounts/repositories/IUsersReposito
 class CreateUserUseCase {
     constructor(
         @inject("UsersRepository")
-        private usersRepository: IUsersRespository
+        private usersRepository: IUsersRepository
     ) {}
 
     async execute({ name, email, password, driver_license }: ICreateUserDTO): Promise<void> {
