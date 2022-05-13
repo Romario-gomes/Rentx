@@ -1,12 +1,8 @@
-import { inject, injectable } from "tsyringe";
-
-import { hash } from "bcryptjs";
- 
 import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
-import { AppError } from "../../../../shared/errors/AppError";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
-
-
+import { hash } from "bcryptjs";
+import { inject, injectable } from "tsyringe";
+import { AppError } from "../../../../shared/errors/AppError";
 
 @injectable()
 class CreateUserUseCase {
@@ -24,12 +20,13 @@ class CreateUserUseCase {
         const passwordHash = await hash(password, 8);
 
         await this.usersRepository.create({
-            name, 
-            email, 
-            password: passwordHash, 
+            name,
+            email,
+            password: passwordHash,
             driver_license
         });
     }
 }
 
-export { CreateUserUseCase }
+export { CreateUserUseCase };
+
