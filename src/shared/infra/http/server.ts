@@ -1,11 +1,15 @@
-import '@shared/container';
-import { AppError } from '@shared/errors/AppError';
-import createConnection from '@shared/infra/typeorm';
-import express, { NextFunction, Request, Response } from 'express';
-import 'express-async-errors';
-import swaggerUi from 'swagger-ui-express';
-import swaggerFile from '../../../swagger.json';
-import { router } from './routes';
+import "reflect-metadata";
+import "@shared/container";
+import express, { NextFunction, Request, Response } from "express";
+
+import { AppError } from "@shared/errors/AppError";
+import createConnection from "@shared/infra/typeorm";
+
+import "express-async-errors";
+import swaggerUi from "swagger-ui-express";
+
+import swaggerFile from "../../../swagger.json";
+import { router } from "./routes";
 
 createConnection();
 const app = express();
@@ -13,7 +17,7 @@ const app = express();
 app.use(express.json());
 
 // rota padrão onde vai ficar a documentação do projeto
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(router);
 
@@ -26,10 +30,10 @@ app.use(
     }
 
     return response.status(500).json({
-      status: 'Error',
+      status: "Error",
       Message: `Internal server error - ${err.message}`,
     });
   },
 );
 
-app.listen(3333, () => console.log('Server is running'));
+app.listen(3333, () => console.log("Server is running"));
