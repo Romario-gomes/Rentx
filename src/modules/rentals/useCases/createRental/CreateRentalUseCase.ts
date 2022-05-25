@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import { inject, injectable } from "tsyringe";
 
 import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
@@ -10,10 +10,12 @@ interface IRequest {
   car_id: string;
   expected_return_date: Date;
 }
-
+@injectable()
 class CreateRentalUseCase {
   constructor(
+    @inject("RentalsRepository")
     private rentalsRepository: IRentalsRepository,
+    @inject("DayjsDateProvider")
     private dateProvide: IDateProvider,
   ) {}
 
@@ -39,7 +41,6 @@ class CreateRentalUseCase {
     if (rentalOpenToUser) {
       throw new AppError("There's a rental in progress for user!");
     }
-
     const compare = this.dateProvide.compareInHours(
       this.dateProvide.dateNow(),
       expected_return_date,
