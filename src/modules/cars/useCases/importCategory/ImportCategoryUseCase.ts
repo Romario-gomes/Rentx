@@ -1,7 +1,7 @@
-import fs from "fs";
 import csvParse from "csv-parse";
-import { CategoriesRepository } from "@modules/cars/infra/typeorm/repositories/repositories/implementations/CategoriesRepository";
+import fs from "fs";
 
+import { CategoriesRepository } from "@modules/cars/infra/typeorm/repositories/CategoriesRepository";
 
 interface IImportCategory {
   name: string;
@@ -19,18 +19,18 @@ class ImportCategoryUseCase {
       stream.pipe(parseFile);
 
       parseFile
-        .on("data", async (line) => {
+        .on("data", async line => {
           const [name, description] = line;
           categories.push({
             name,
-            description
+            description,
           });
         })
         .on("end", () => {
           fs.promises.unlink(file.path);
           resolve(categories);
         })
-        .on("error", (err) => {
+        .on("error", err => {
           reject(err);
         });
     });
@@ -39,13 +39,15 @@ class ImportCategoryUseCase {
   async execute(file: Express.Multer.File): Promise<void> {
     const categories = await this.loadCategories(file);
 
-    categories.map(async (category) => {
+    categories.map(async category => {
       const { name, description } = category;
-      const categoryExists = this.categoriesRepository.findByName(category.name);
+      const categoryExists = this.categoriesRepository.findByName(
+        category.name,
+      );
       if (!categoryExists) {
         this.categoriesRepository.create({
           name,
-          description
+          description,
         });
       }
     });
