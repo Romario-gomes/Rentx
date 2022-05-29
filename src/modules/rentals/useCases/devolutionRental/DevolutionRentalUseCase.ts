@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
+import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
@@ -20,9 +21,9 @@ class DevolutionRentalUseCase {
     private dateProvide: IDateProvider,
   ) {}
 
-  async execute({ id, user_id }: IRequest) {
+  async execute({ id, user_id }: IRequest): Promise<Rental> {
     const rental = await this.rentalsRepository.findById(id);
-    const car = await this.carsRepository.findById(id);
+    const car = await this.carsRepository.findById(rental.car_id);
     const minimum_daily = 1;
     if (!rental) {
       throw new AppError("Rental does not exists!");
@@ -57,6 +58,8 @@ class DevolutionRentalUseCase {
     await this.rentalsRepository.create(rental);
 
     await this.carsRepository.updateAvailable(car.id, true);
+
+    return rental;
   }
 }
 
