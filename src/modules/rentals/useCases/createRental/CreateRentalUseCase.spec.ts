@@ -47,34 +47,29 @@ describe("Create Rental", () => {
   });
 
   it("should not be able to create a new rental if there is another open to them same user", async () => {
-    try {
-      const car = await carsRepositoryInMemory.create({
-        name: "Test",
-        description: "car test",
-        daily_rate: 100,
-        license_plate: "test",
-        fine_amount: 40,
-        category_id: "1234",
-        brand: "brand",
-      });
+    const car = await carsRepositoryInMemory.create({
+      name: "Test",
+      description: "car test",
+      daily_rate: 100,
+      license_plate: "test",
+      fine_amount: 40,
+      category_id: "1234",
+      brand: "brand",
+    });
 
-      await createRentalUseCase.execute({
+    await createRentalUseCase.execute({
+      user_id: "123",
+      car_id: car.id,
+      expected_return_date: dayAdd24Hours,
+    });
+
+    await expect(
+      createRentalUseCase.execute({
         user_id: "123",
         car_id: car.id,
         expected_return_date: dayAdd24Hours,
-      });
-
-      const second_rental = await createRentalUseCase.execute({
-        user_id: "1234",
-        car_id: car.id,
-        expected_return_date: dayAdd24Hours,
-      });
-
-      expect(second_rental).toBeUndefined();
-    } catch (error) {
-      expect(error).toBeInstanceOf(AppError);
-      expect(error.message).toBe("Car is unavailable");
-    }
+      }),
+    ).rejects.toEqual(new AppError("Car is unavailable"));
   });
 
   it("Should not be able to create a new rental if user has a rental in progress", async () => {
