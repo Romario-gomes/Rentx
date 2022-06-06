@@ -22,7 +22,7 @@ describe("Create Car", () => {
       brand: "Brand",
       category_id: "category",
     });
-
+    console.log("Carro: ", car);
     expect(car).toHaveProperty("id");
   });
 
