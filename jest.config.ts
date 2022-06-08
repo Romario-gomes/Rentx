@@ -1,4 +1,5 @@
 import { pathsToModuleNameMapper } from "ts-jest/utils";
+
 import { compilerOptions } from "./tsconfig.json";
 
 export default {
@@ -6,7 +7,7 @@ export default {
   // automock: false,
 
   // Stop running tests after `n` failures
-    bail: true,
+  bail: true,
 
   // The directory where Jest should store its cached dependency information
   // cacheDirectory: "C:\\Users\\romar\\AppData\\Local\\Temp\\jest",
@@ -80,8 +81,8 @@ export default {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-      prefix: "<rootDir>/src/"
-    }),
+    prefix: "<rootDir>/src/",
+  }),
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -93,7 +94,7 @@ export default {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-    preset: "ts-jest",
+  preset: "ts-jest",
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -146,9 +147,7 @@ export default {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-   testMatch: [
-     "**/*.spec.ts"
-   ],
+  testMatch: ["**/*.spec.ts"],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
@@ -163,6 +162,7 @@ export default {
 
   // This option allows use of a custom test runner
   // testRunner: "jest-circus/runner",
+  testRunner: "jest-jasmine2",
 
   // This option sets the URL for the jsdom environment. It is reflected in properties such as location.href
   // testURL: "http://localhost",
