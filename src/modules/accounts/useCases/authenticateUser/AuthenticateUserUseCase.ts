@@ -22,6 +22,7 @@ interface IResponse {
   token: string;
   refresh_token: string;
 }
+
 @injectable()
 class AuthenticateUserUseCase {
   constructor(
