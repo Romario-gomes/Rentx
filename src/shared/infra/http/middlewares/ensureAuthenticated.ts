@@ -26,7 +26,6 @@ export async function ensureAuthenticated(
 
   // desestruturar o token
   const [, token] = authHeader.split(" ");
-  console.log(token);
   try {
     const { sub: user_id } = verify(token, auth.secret_token) as IPayload;
 
@@ -36,7 +35,6 @@ export async function ensureAuthenticated(
 
     next();
   } catch (error) {
-    console.log(error);
     throw new AppError("Invalid token!", 401);
   }
 }
