@@ -23,18 +23,6 @@ class CarsRepository implements ICarsRepository {
     specifications,
     id,
   }: ICreateCarDTO): Promise<Car> {
-    console.log("Chegou no repositorio", {
-      name,
-      description,
-      daily_rate,
-      license_plate,
-      fine_amount,
-      brand,
-      category_id,
-      specifications,
-      id,
-    });
-
     const car = this.repository.create({
       name,
       description,

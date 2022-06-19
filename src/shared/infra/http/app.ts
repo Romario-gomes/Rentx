@@ -9,6 +9,8 @@ import createConnection from "@shared/infra/typeorm";
 
 import "express-async-errors";
 
+import upload from "@config/upload";
+
 import swaggerFile from "../../../swagger.json";
 import { router } from "./routes";
 
@@ -19,6 +21,9 @@ app.use(express.json());
 
 // rota padrão onde vai ficar a documentação do projeto
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
+app.use("/avatar", express.static(`${upload.tmpFolder}/avatar`));
+app.use("/cars", express.static(`${upload.tmpFolder}/cars`));
 
 app.use(router);
 
