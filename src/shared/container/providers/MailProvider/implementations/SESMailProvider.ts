@@ -11,12 +11,16 @@ class SESMailProvider implements IMailProvider {
   private client: Transporter;
   constructor() {
     this.client = nodemailer.createTransport({
-      SES: new SES({
-        apiVersion: "2010-12-01",
-        region: process.env.AWS_REGION,
-      }),
+      host: process.env.MAIL_HOST,
+      port: Number(process.env.MAIL_PORT),
+
+      auth: {
+        user: process.env.MAIL_USERNAME,
+        pass: process.env.MAIL_PASSWORD,
+      },
     });
   }
+
   async sendMail(
     to: string,
     subject: string,
