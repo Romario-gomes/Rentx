@@ -1,6 +1,8 @@
 import "reflect-metadata";
+import dotenv from "dotenv";
 import "dotenv/config";
 import "@shared/container";
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
 
@@ -15,8 +17,10 @@ import swaggerFile from "../../../swagger.json";
 import { router } from "./routes";
 
 createConnection();
+dotenv.config();
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 // rota padrão onde vai ficar a documentação do projeto
