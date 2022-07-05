@@ -22,8 +22,8 @@ const upload = multer(uploadConfig);
 carsRoutes.get("/available", listAvailableCarsController.handle);
 carsRoutes.post(
   "/",
-  ensureAuthenticated,
-  ensureAdmin,
+  /*   ensureAuthenticated,
+  ensureAdmin, */
   createCarController.handle,
 );
 carsRoutes.post(
