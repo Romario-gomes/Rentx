@@ -1,10 +1,6 @@
 {
     "type": "postgres",
-    "port": 5432,
-    "host": "ec2-34-239-241-121.compute-1.amazonaws.com",
-    "username": "zqkshvbwdiuege",
-    "password": "d66bf111235e1c29a41a7dd2de77e89818422307ca77ec0b0019c2a110c8c551",
-    "database": "dd94uvhc3rjbe7",
+    "url": "postgresql://postgres:VPLIWhJhCnZrV4E0dRGP@containers-us-west-61.railway.app:7153/railway",
     "synchronize": "false",
     "extra": {
       "ssl": {
