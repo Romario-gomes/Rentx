@@ -19,8 +19,8 @@ const importCategoryController = new ImportCategoryController();
 
 categoriesRoutes.post(
   "/",
-  ensureAuthenticated,
-  ensureAdmin,
+  /*   ensureAuthenticated,
+  ensureAdmin, */
   createCategoryController.handle,
 );
 
